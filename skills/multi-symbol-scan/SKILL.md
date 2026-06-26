@@ -35,10 +35,12 @@ action: "screenshot"
 ### For Custom Analysis (per-symbol)
 Loop through symbols manually:
 1. `chart_set_symbol` + `chart_set_timeframe`
-2. `chart_manage_indicator` — add the study
-3. `data_get_ohlcv` — pull price data
-4. `data_get_indicator` — read indicator values
-5. Analyze and record findings
+2. `chart_get_state` — confirm symbol/timeframe and collect visible indicator entity IDs
+3. `chart_manage_indicator` — add the study if needed
+4. `data_get_study_values` — read visible indicator values
+5. `data_get_ohlcv` with `summary: true` — pull compact price data
+6. If a specific indicator requires `data_get_indicator`, pass the entity_id obtained from `chart_get_state`
+7. Analyze and record findings
 
 ## Step 3: Compile Results
 

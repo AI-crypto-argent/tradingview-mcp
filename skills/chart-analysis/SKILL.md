@@ -11,7 +11,7 @@ You are performing technical analysis on a TradingView chart.
 
 1. `chart_set_symbol` — switch to the requested symbol
 2. `chart_set_timeframe` — set the appropriate timeframe
-3. Wait for the chart to load (the tool handles this)
+3. `chart_get_state` — confirm symbol/timeframe and collect visible indicator entity IDs
 
 ## Step 2: Add Indicators
 
@@ -42,10 +42,12 @@ Use drawing tools to mark up the chart:
 
 ## Step 5: Capture and Analyze
 
-1. `capture_screenshot` — screenshot the annotated chart
-2. `data_get_ohlcv` — pull recent price data for quantitative analysis
-3. `quote_get` — get the current real-time price
-4. `symbol_info` — get symbol metadata (exchange, type, session)
+1. `chart_get_state` — refresh current chart state if indicators or symbol changed
+2. `data_get_study_values` — read visible indicator values
+3. `data_get_ohlcv` with `summary: true` — pull compact recent price data for quantitative analysis
+4. `quote_get` — get the current real-time price
+5. `symbol_info` — get symbol metadata (exchange, type, session)
+6. `capture_screenshot` — screenshot the annotated chart
 
 ## Step 6: Report
 

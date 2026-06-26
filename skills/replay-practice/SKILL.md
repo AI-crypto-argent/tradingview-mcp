@@ -11,14 +11,16 @@ You are guiding the user through replay-mode practice trading on TradingView.
 
 1. `chart_set_symbol` — set the desired symbol
 2. `chart_set_timeframe` — set the trading timeframe
-3. `replay_start` with a date — enter replay mode at the starting point
+3. `chart_get_state` — confirm symbol/timeframe before replay
+4. `replay_start` with a date — enter replay mode at the starting point
 
 ## Step 2: Pre-Trade Analysis
 
 Before stepping through bars:
-1. `data_get_ohlcv` — get the historical context leading up to the replay point
-2. Add any indicators the user wants: `chart_manage_indicator`
-3. `capture_screenshot` — show the starting chart state
+1. `chart_get_state` — get the replay chart state
+2. `data_get_ohlcv` with `summary: true` — get compact historical context leading up to the replay point
+3. Add any indicators the user wants: `chart_manage_indicator`
+4. `capture_screenshot` — show the starting chart state
 
 ## Step 3: Step Through Bars
 

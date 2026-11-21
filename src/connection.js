@@ -124,14 +124,6 @@ export async function evaluateAsync(expression) {
   return evaluate(expression, { awaitPromise: true });
 }
 
-export async function disconnect() {
-  if (client) {
-    try { await client.close(); } catch {}
-    client = null;
-    targetInfo = null;
-  }
-}
-
 // --- Direct API path helpers ---
 // Each returns the STRING expression path after verifying it exists.
 // Callers use the returned string in their own evaluate() calls.
@@ -152,14 +144,6 @@ export async function getChartCollection() {
   return verifyAndReturn(KNOWN_PATHS.chartWidgetCollection, 'Chart Widget Collection');
 }
 
-export async function getBottomBar() {
-  return verifyAndReturn(KNOWN_PATHS.bottomWidgetBar, 'Bottom Widget Bar');
-}
-
 export async function getReplayApi() {
   return verifyAndReturn(KNOWN_PATHS.replayApi, 'Replay API');
-}
-
-export async function getMainSeriesBars() {
-  return verifyAndReturn(KNOWN_PATHS.mainSeriesBars, 'Main Series Bars');
 }

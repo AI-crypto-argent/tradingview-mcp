@@ -12,7 +12,7 @@ const MODEL = `${CHART_API}._chartWidget.model()`;
  * Calls fetcher(), compares to last value, emits JSONL on change.
  * Writes to stdout directly for pipe-friendliness.
  */
-async function pollLoop(fetcher, { interval = 500, dedupe = true, label = 'stream' } = {}) {
+async function pollLoop(fetcher, { interval = 500, label = 'stream' } = {}) {
   let lastHash = null;
   let running = true;
 
@@ -33,8 +33,8 @@ async function pollLoop(fetcher, { interval = 500, dedupe = true, label = 'strea
       const data = await fetcher();
       if (!data) { await sleep(interval); continue; }
 
-      const hash = dedupe ? JSON.stringify(data) : null;
-      if (!dedupe || hash !== lastHash) {
+      const hash = JSON.stringify(data);
+      if (hash !== lastHash) {
         lastHash = hash;
         const line = JSON.stringify({ ...data, _ts: Date.now(), _stream: label });
         process.stdout.write(line + '\n');
